@@ -13,7 +13,7 @@
                 <p>
                     {{$post->body}}
                 </p>
-                <a href="#">read more</a>
+                <a href="{{route('posts.show', $post->slug)}}">read more</a>
             @empty
                 <h2>
                     No post found, 
