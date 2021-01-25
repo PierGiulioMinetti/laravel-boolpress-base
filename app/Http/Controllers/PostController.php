@@ -104,7 +104,39 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // GET DATA FROM FORM
+        $data = $request->all();
+
+        // VALIDATE
+        $request->validate($this->ruleValidation());
+
+        // GET POST TO UPDATE
+        $post = Post::find($id);
+
+        // UPDATE SLUG WHEN I CHANGE NAME
+        $data['slug'] = Str::slug($data['title'], '-');
+
+        // IF IMG CHANGE
+        // check if I have an img posted
+        if(!empty($data['path_img'])) {
+            // delete previous one before posting the new one
+            if(!empty($post->path_img));{
+                Storage::disk('public')->delete($post->path_img);
+            }
+            // upload new img
+            $data['path_img'] = Storage::disk('public')->put('images', $data['path_img']);
+        }
+
+            // UPDATE DB 
+            $updated = $post->update($data);  // <--- fillable nel Model
+
+            // CHECK IF WORKED
+            if($updated){
+                return redirect()->route('posts.show', $post->slug);
+            } else {
+                return redirect()->route('homepage');
+            }
+
     }
 
     /**

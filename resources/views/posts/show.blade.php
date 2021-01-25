@@ -21,7 +21,7 @@
             @if (!empty($post->path_img))
 
                                     {{-- concateno seguendo la path dell'immagine --}}
-                <img src="{{ asset('storage/' . $post->path_img) }}" alt="{{ $post->title }}">
+                <img width="500px" src="{{ asset('storage/' . $post->path_img) }}" alt="{{ $post->title }}">
 
                 @else 
 
