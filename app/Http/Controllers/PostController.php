@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Post;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -37,9 +39,34 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        // GET DATA
+        $data = $request->all();
+        // dd($data);
 
+        // VALIDATION
+        $request->validate($this->ruleValidation());
+
+        // SET POST SLUG
+        $data['slug']= Str::slug($data['title'], '-');
+        // dd($data);
+
+        // se la img è presente
+        if(!empty($data['path_img'])) {
+            $data['path_img'] = Storage::disk('public')->put('images', $data['path_img']);
+        }
+
+        // SAVE TO DB
+        $newPost = new Post();
+        $newPost->fill($data);
+        $saved = $newPost->save();
+
+        if($saved){
+            return redirect()->route('posts.index');
+        } else {
+            return redirect()->route('homepage');
+        }
+    }
+    
     /**
      * Display the specified resource.
      *
@@ -84,4 +111,14 @@ class PostController extends Controller
     {
         //
     }
+
+    // siamo all'interno della classe PostController
+    private function ruleValidation() {
+        return [
+            'title'=> 'required',
+            'body'=> 'required',
+            'path_img'=> 'image',
+        ];
+    }
+
 }
