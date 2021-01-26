@@ -136,6 +136,7 @@ class PostController extends Controller
             } else {
                 return redirect()->route('homepage');
             }
+            //
 
     }
 
