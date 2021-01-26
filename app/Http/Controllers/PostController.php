@@ -78,6 +78,14 @@ class PostController extends Controller
         // return $slug;
         $post = Post::where('slug', $slug)->first();
         // dd($post);
+
+        // check if the slug is wrong
+        if(empty($post)){
+            abort(404);
+        }
+
+
+
         return view('posts.show', compact('post'));
     }
 
@@ -91,6 +99,11 @@ class PostController extends Controller
     {                           
                             // due parametri è uguaglianza
         $post = Post::where('slug', $slug)->first();
+
+        // se ho un errore nello slug mi reindizzeremo alla pagina 404
+        if(empty($post)) {
+            abort(404);
+        }
 
         return view('posts.edit', compact('post'));
     }
