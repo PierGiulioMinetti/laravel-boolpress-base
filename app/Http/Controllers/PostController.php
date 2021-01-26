@@ -136,7 +136,8 @@ class PostController extends Controller
             } else {
                 return redirect()->route('homepage');
             }
-            //
+            
+            //test vscode
 
     }
 
@@ -146,9 +147,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post) //questa versione Post $post è l'equivalente di riga 152
     {
-        //
+        // $post = Post::find($id);
+
+        // save title reference to pass to show which file has been deleted
+        $title= $post->title;
+        $deleted = $post->delete();
+
+        if($deleted){ // with--> qui creiamo la sessione con with e passiamo nome sessione(scelta da noi)
+                        // e secondo valore il nome del parametro da mostrare(titolo file cancellato)
+
+            if(!empty($post->path_img)){
+                Storage::disk('public')->delete($post->path_img);
+            }
+            return redirect()->route('posts.index')->with('post-deleted', $title);
+        } else {
+            return redirect()->route('homepage');
+        }
+
     }
 
     // siamo all'interno della classe PostController

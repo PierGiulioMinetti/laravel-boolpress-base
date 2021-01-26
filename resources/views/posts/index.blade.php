@@ -2,7 +2,18 @@
 
 @section('content')
         <section class="container mb-5">
-           
+            
+            @if (session('post-deleted'))
+                <div class="alert alert-success">
+                    Post '{{ session('post-deleted')}}' has been succesfully deleted.
+                </div>
+                
+            @endif
+
+            <h1>
+                BLOG ARCHIVE
+            </h1>
+
             @forelse ($posts as $post)
                 <h2>
                     {{$post->title}}
