@@ -3,6 +3,7 @@
 use App\Post;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Str;
+use Faker\Generator as Faker;  
 class PostseTableSeeder extends Seeder
 {
     /**
@@ -12,6 +13,10 @@ class PostseTableSeeder extends Seeder
      */
     public function run()
     {
+        // SE VOGLIAMO ELIMINARE TUTTI I DATI PRECEDENTI QUANDO CREIAMO I SEED
+        // Post::truncate(); 
+
+        // BASIC WAY
 
         $posts = [
             [
@@ -29,7 +34,7 @@ class PostseTableSeeder extends Seeder
                 'body'=> 'Body number 3  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Earum culpa nulla in cumque incidunt dolore totam vel quod recusandae deleniti!'
             ],
 
-        ];
+        ]; 
 
         foreach($posts as $post){
             // Creazione istanza da modello
