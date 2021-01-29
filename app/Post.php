@@ -16,4 +16,12 @@ class Post extends Model
          'slug',
          'path_img'
      ] ;
+
+        // FUNZIONE RELAZIONE TABELLA PIVOT
+        // posts - tags 
+        public function tags() {
+            return $this->belongsToMany('App\Tag');
+        }
+
+
 }
