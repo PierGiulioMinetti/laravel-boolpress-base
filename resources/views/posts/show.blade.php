@@ -31,7 +31,7 @@
 
                 @else 
 
-                <img src="https://www.worldloppet.com/wp-content/uploads/2018/10/no-img-placeholder.png"> 
+                <img src="{{asset('no-img/no-image.png' )}}"> 
                 
             @endif
         </section>

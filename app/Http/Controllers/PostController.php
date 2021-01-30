@@ -84,8 +84,6 @@ class PostController extends Controller
             abort(404);
         }
 
-
-
         return view('posts.show', compact('post'));
     }
 
@@ -149,8 +147,6 @@ class PostController extends Controller
             } else {
                 return redirect()->route('homepage');
             }
-            
-            //test vscode
 
     }
 
@@ -160,7 +156,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Post $post) //questa versione Post $post è l'equivalente di riga 152
+    public function destroy(Post $post) //questa versione Post $post è l'equivalente di riga 161
     {
         // $post = Post::find($id);
 

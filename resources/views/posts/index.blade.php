@@ -19,8 +19,11 @@
                     {{$post->title}}
                 </h2>
                 <h5>
-                    {{$post->created_at->format('d/m/Y')}}
+                   Created: {{$post->created_at->format('d/m/Y')}}
                 </h5>
+                <h5>
+                    Last update: {{$post->updated_at->diffForHumans()}}
+                </h5> 
                 <p>
                     {{$post->body}}
                 </p>
